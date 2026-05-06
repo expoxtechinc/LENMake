@@ -1,0 +1,47 @@
+{
+  "name": "Holy Bible — KJV",
+  "short_name": "Holy Bible",
+  "description": "Read the complete King James Bible offline. Search, study, and explore God's Word anywhere.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0a1e",
+  "theme_color": "#1a1040",
+  "lang": "en",
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Read Genesis",
+      "short_name": "Genesis",
+      "description": "Open Genesis Chapter 1",
+      "url": "/?book=Genesis&chapter=1"
+    },
+    {
+      "name": "Search Bible",
+      "short_name": "Search",
+      "description": "Search the Bible",
+      "url": "/?tab=search"
+    }
+  ]
+}
