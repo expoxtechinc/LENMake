@@ -1,0 +1,55 @@
+{
+  "title": "The Book of Revelation",
+  "subtitle": "A Study in the Apocalypse",
+  "intro": "The Book of Revelation, also known as the Apocalypse of John, is the final book of the New Testament. Written by the Apostle John while exiled on the island of Patmos around 95 AD, it is a prophetic and symbolic vision of the end of the age, the second coming of Jesus Christ, and the ultimate victory of God over evil.",
+  "items": [
+    {
+      "id": 1,
+      "category": "Introduction",
+      "title": "What Is the Book of Revelation?",
+      "content": "The Book of Revelation is a letter written by the Apostle John to seven churches in Asia Minor (modern-day Turkey). It belongs to the literary genre of 'apocalyptic' writing — a form of prophecy that uses rich symbolic imagery to communicate spiritual realities. The word 'apocalypse' literally means 'unveiling' or 'revelation.' Rather than being a terrifying mystery, it is meant to bring hope and encouragement to believers facing persecution. Central to Revelation is the certainty that God is sovereign, Jesus Christ has won the ultimate victory, and all of history is moving toward God's glorious purpose.",
+      "key_verse": "Blessed is he that readeth, and they that hear the words of this prophecy. — Revelation 1:3",
+      "icon": "📖"
+    },
+    {
+      "id": 2,
+      "category": "The Seven Churches",
+      "title": "Letters to the Seven Churches",
+      "content": "In chapters 2 and 3, Jesus dictates letters to seven actual churches: Ephesus, Smyrna, Pergamum, Thyatira, Sardis, Philadelphia, and Laodicea. Each letter follows a similar pattern: Jesus identifies Himself with a specific attribute, commends the church's strengths, identifies their failures, calls them to repentance, and promises rewards to those who overcome. These letters speak not just to those ancient congregations but to the universal church throughout history — calling believers to faithfulness, purity, perseverance, and passion for God.",
+      "key_verse": "He that hath an ear, let him hear what the Spirit saith unto the churches. — Revelation 2:7",
+      "icon": "✉️"
+    },
+    {
+      "id": 3,
+      "category": "The Throne Room",
+      "title": "The Vision of Heaven",
+      "content": "In chapters 4 and 5, John is caught up into heaven and given a vision of the throne room of God. He sees the Ancient of Days seated on a throne surrounded by lightning and thunder, twenty-four elders, four living creatures, and a sea of glass. He sees a scroll sealed with seven seals — the scroll of God's judgment and redemption plan. No one is found worthy to open the scroll, and John weeps. Then a Lion from the tribe of Judah — who appears as a Lamb that was slain — steps forward and takes the scroll. The four living creatures and the elders fall down before Him, singing: 'Worthy is the Lamb that was slain to receive power and riches and wisdom and strength and honour and glory and blessing.'",
+      "key_verse": "Worthy is the Lamb that was slain to receive power, and riches, and wisdom. — Revelation 5:12",
+      "icon": "👑"
+    },
+    {
+      "id": 4,
+      "category": "The Seven Seals",
+      "title": "The Opening of the Seals",
+      "content": "Chapters 6-8 describe the opening of seven seals on the scroll. The first four seals release four horsemen: a white horse (conquest), a red horse (war), a black horse (famine), and a pale horse (death). The fifth seal reveals souls of martyrs under the altar, crying out for justice. The sixth seal brings cosmic signs — an earthquake, the sun turning black, the moon turning red. Before the seventh seal is opened, 144,000 from the tribes of Israel are sealed for protection, and a great multitude from every nation is seen before the throne. The seventh seal opens with silence in heaven for half an hour — followed by the seven trumpets.",
+      "key_verse": "And God shall wipe away all tears from their eyes. — Revelation 7:17",
+      "icon": "📜"
+    },
+    {
+      "id": 5,
+      "category": "The New Jerusalem",
+      "title": "The New Heaven and New Earth",
+      "content": "In chapters 21-22, John sees the culmination of all history — a new heaven and a new earth. The old order has passed away. The holy city, New Jerusalem, descends from God out of heaven, beautiful as a bride prepared for her husband. God Himself dwells with His people. There is no more death, no more sorrow, no more crying, no more pain. God makes all things new. The city shines with the glory of God, its walls adorned with precious stones. The river of the water of life flows from the throne of God. The tree of life bears fruit every month. There is no temple, no sun, no moon — for God Himself is the light. 'Come, Lord Jesus!' is the prayer that closes Scripture.",
+      "key_verse": "And God shall wipe away all tears from their eyes; and there shall be no more death. — Revelation 21:4",
+      "icon": "🌟"
+    },
+    {
+      "id": 6,
+      "category": "Hope",
+      "title": "The Promise: He Is Coming",
+      "content": "The final message of Revelation — and of the entire Bible — is one of hope. Jesus Christ, the Alpha and Omega, the Beginning and the End, is coming again. He says three times in the final chapter: 'Behold, I come quickly.' This promise sustained the early church through Roman persecution, and it sustains believers today. Whatever evil you face, whatever suffering you endure, whatever injustice you witness — take courage. History is not spinning out of control. God is on the throne. Jesus has the keys of death and hell. And He is coming to make all things new. 'Even so, come, Lord Jesus.'",
+      "key_verse": "Surely I come quickly. Amen. Even so, come, Lord Jesus. — Revelation 22:20",
+      "icon": "✨"
+    }
+  ]
+}
