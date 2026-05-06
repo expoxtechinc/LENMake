@@ -1,55 +1,86 @@
-/* ===== HOLY BIBLE PWA — STANDALONE VERSION ===== */
+/* ===== HOLY BIBLE PWA — MAIN APPLICATION ===== */
 
+/* ---------- STATE ---------- */
 const state = {
   tab: 'home',
-  booksView: 'list',
+  booksView: 'list',       // 'list' | 'chapters' | 'reader'
   currentBook: null,
   currentChapter: null,
   studySection: 'goodnews',
   fontSize: 18,
   theme: 'dark',
-  data: { bible: null, goodnews: null, stories: null, apocalypse: null, mysteries: null },
+  data: {
+    bible: null,
+    goodnews: null,
+    stories: null,
+    apocalypse: null,
+    mysteries: null,
+  },
   searchQuery: '',
+  history: [],
   installPrompt: null,
 };
 
+/* ---------- DOM CACHE ---------- */
 const $ = (id) => document.getElementById(id);
 const $$ = (sel) => document.querySelectorAll(sel);
 
+/* ---------- HELPERS ---------- */
 function showToast(msg) {
   let t = document.querySelector('.toast');
-  if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
+  if (!t) {
+    t = document.createElement('div');
+    t.className = 'toast';
+    document.body.appendChild(t);
+  }
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 function escapeHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
 function highlightText(text, query) {
   if (!query) return escapeHtml(text);
   const escaped = escapeHtml(text);
-  const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
   return escaped.replace(regex, '<mark>$1</mark>');
 }
 
+/* ---------- DATA LOADING ---------- */
 async function loadData() {
+  const base = './';
+
   const fetchJSON = async (name) => {
     try {
-      const res = await fetch(name);
-      if (!res.ok) throw new Error(res.status);
+      const url = base.endsWith('/') ? `${base}${name}` : `${base}/${name}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`${res.status}`);
       return res.json();
-    } catch (e) { console.warn('Failed to load ' + name, e); return null; }
+    } catch (e) {
+      console.warn(`Failed to load ${name}:`, e);
+      return null;
+    }
   };
+
   const [bible, goodnews, stories, apocalypse, mysteries] = await Promise.all([
-    fetchJSON('bible.json'), fetchJSON('goodnews.json'), fetchJSON('stories.json'),
-    fetchJSON('apocalypse.json'), fetchJSON('mysteries.json'),
+    fetchJSON('bible.json'),
+    fetchJSON('goodnews.json'),
+    fetchJSON('stories.json'),
+    fetchJSON('apocalypse.json'),
+    fetchJSON('mysteries.json'),
   ]);
+
   state.data = { bible, goodnews, stories, apocalypse, mysteries };
 }
 
+/* ---------- DAILY VERSE ---------- */
 const DAILY_VERSES = [
   { text: 'For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.', ref: 'John 3:16' },
   { text: 'The LORD is my shepherd; I shall not want.', ref: 'Psalm 23:1' },
@@ -71,41 +102,54 @@ const DAILY_VERSES = [
 function setDailyVerse() {
   const day = Math.floor(Date.now() / 86400000);
   const verse = DAILY_VERSES[day % DAILY_VERSES.length];
-  $('daily-verse-text').textContent = '\u201c' + verse.text + '\u201d';
-  $('daily-verse-ref').textContent = '\u2014 ' + verse.ref;
+  $('daily-verse-text').textContent = `"${verse.text}"`;
+  $('daily-verse-ref').textContent = `— ${verse.ref}`;
 }
 
+/* ---------- NAVIGATION ---------- */
 function navigateTab(tab) {
-  $$('.page').forEach(p => p.classList.remove('active'));
-  $$('.nav-btn').forEach(b => b.classList.remove('active'));
+  $$('.page').forEach((p) => p.classList.remove('active'));
+  $$('.nav-btn').forEach((b) => b.classList.remove('active'));
+
   state.tab = tab;
-  var page = $('page-' + tab);
+  const page = $(`page-${tab}`);
   if (page) page.classList.add('active');
-  var navBtn = document.querySelector('.nav-btn[data-tab="' + tab + '"]');
+
+  const navBtn = document.querySelector(`.nav-btn[data-tab="${tab}"]`);
   if (navBtn) navBtn.classList.add('active');
+
+  // Update back button
   updateBackButton();
+
+  // Render tab-specific content
   if (tab === 'books') renderBooksList();
   if (tab === 'study') renderStudy(state.studySection);
   if (tab === 'search') $('search-input').focus();
 }
 
 function updateBackButton() {
-  var showBack = state.tab === 'books' && state.booksView !== 'list';
+  const showBack =
+    (state.tab === 'books' && state.booksView !== 'list');
   $('btn-back').classList.toggle('hidden', !showBack);
-  var titleEl = $('header-title');
+
+  // Update header title
+  const titleEl = $('header-title');
   if (state.tab === 'books' && state.booksView === 'chapters') {
-    titleEl.innerHTML = '<span class="header-cross">\u271D</span><span>' + escapeHtml(state.currentBook) + '</span>';
+    titleEl.innerHTML = `<span class="header-cross">✝</span><span>${state.currentBook}</span>`;
   } else if (state.tab === 'books' && state.booksView === 'reader') {
-    titleEl.innerHTML = '<span class="header-cross">\u271D</span><span>' + escapeHtml(state.currentBook) + ' ' + state.currentChapter + '</span>';
+    titleEl.innerHTML = `<span class="header-cross">✝</span><span>${state.currentBook} ${state.currentChapter}</span>`;
   } else {
-    titleEl.innerHTML = '<span class="header-cross">\u271D</span><span>Holy Bible</span>';
+    titleEl.innerHTML = `<span class="header-cross">✝</span><span>Holy Bible</span>`;
   }
 }
 
 function goBack() {
   if (state.tab === 'books') {
-    if (state.booksView === 'reader') showBooksView('chapters');
-    else if (state.booksView === 'chapters') showBooksView('list');
+    if (state.booksView === 'reader') {
+      showBooksView('chapters');
+    } else if (state.booksView === 'chapters') {
+      showBooksView('list');
+    }
   }
 }
 
@@ -115,114 +159,154 @@ function showBooksView(view) {
   $('chapters-view').classList.toggle('hidden', view !== 'chapters');
   $('reader-view').classList.toggle('hidden', view !== 'reader');
   updateBackButton();
-  var views = { list: 'books-list', chapters: 'chapters-view', reader: 'reader-view' };
-  var el = $(views[view]);
+
+  // Scroll to top
+  const views = { list: 'books-list', chapters: 'chapters-view', reader: 'reader-view' };
+  const el = $(views[view]);
   if (el) el.scrollTop = 0;
 }
 
+/* ---------- BOOKS LIST ---------- */
 function renderBooksList() {
-  var meta = state.data.bible && state.data.bible._meta && state.data.bible._meta.books;
+  const meta = state.data.bible?._meta?.books;
   if (!meta) return;
-  var otContainer = $('ot-books');
-  var ntContainer = $('nt-books');
+
+  const otContainer = $('ot-books');
+  const ntContainer = $('nt-books');
   otContainer.innerHTML = '';
   ntContainer.innerHTML = '';
-  var booksArr = Object.entries(meta).sort(function(a,b){ return a[1].order - b[1].order; });
-  var ot = booksArr.filter(function(e){ return e[1].testament === 'OT'; });
-  var nt = booksArr.filter(function(e){ return e[1].testament === 'NT'; });
-  function makeBookBtn(name, m, idx) {
-    var btn = document.createElement('button');
+
+  const booksArr = Object.entries(meta).sort((a, b) => a[1].order - b[1].order);
+  const ot = booksArr.filter(([, m]) => m.testament === 'OT');
+  const nt = booksArr.filter(([, m]) => m.testament === 'NT');
+
+  function makeBookBtn(name, meta, idx) {
+    const btn = document.createElement('button');
     btn.className = 'book-btn';
-    btn.innerHTML = '<span class="book-btn-num">' + (idx+1) + '</span><span><div class="book-btn-name">' + escapeHtml(name) + '</div><div class="book-btn-chapters">' + m.chapters + ' ch.</div></span>';
-    btn.addEventListener('click', function(){ openBook(name); });
+    btn.innerHTML = `
+      <span class="book-btn-num">${idx + 1}</span>
+      <span>
+        <div class="book-btn-name">${name}</div>
+        <div class="book-btn-chapters">${meta.chapters} ch.</div>
+      </span>
+    `;
+    btn.addEventListener('click', () => openBook(name));
     return btn;
   }
-  ot.forEach(function(e,i){ otContainer.appendChild(makeBookBtn(e[0], e[1], i)); });
-  nt.forEach(function(e,i){ ntContainer.appendChild(makeBookBtn(e[0], e[1], i)); });
+
+  ot.forEach(([name, m], i) => otContainer.appendChild(makeBookBtn(name, m, i)));
+  nt.forEach(([name, m], i) => ntContainer.appendChild(makeBookBtn(name, m, i)));
 }
 
 function openBook(bookName) {
   state.currentBook = bookName;
-  var meta = state.data.bible && state.data.bible._meta && state.data.bible._meta.books && state.data.bible._meta.books[bookName];
-  var chapters = (meta && meta.chapters) || 50;
-  var bookData = (state.data.bible && state.data.bible[bookName]) || {};
+  const meta = state.data.bible?._meta?.books?.[bookName];
+  const chapters = meta?.chapters || 50;
+  const bookData = state.data.bible?.[bookName] || {};
+
   $('chapter-list-title').textContent = bookName;
-  var grid = $('chapter-grid');
+
+  const grid = $('chapter-grid');
   grid.innerHTML = '';
-  for (var i = 1; i <= chapters; i++) {
-    (function(num) {
-      var btn = document.createElement('button');
-      btn.className = 'chapter-btn';
-      if (bookData[String(num)]) btn.classList.add('has-data');
-      btn.textContent = num;
-      btn.addEventListener('click', function(){ openChapter(bookName, num); });
-      grid.appendChild(btn);
-    })(i);
+
+  for (let i = 1; i <= chapters; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'chapter-btn';
+    if (bookData[String(i)]) btn.classList.add('has-data');
+    btn.textContent = i;
+    btn.addEventListener('click', () => openChapter(bookName, i));
+    grid.appendChild(btn);
   }
+
   showBooksView('chapters');
 }
 
 function openChapter(bookName, chapterNum) {
   state.currentBook = bookName;
   state.currentChapter = chapterNum;
-  var bookData = state.data.bible && state.data.bible[bookName];
-  var chapterData = bookData && bookData[String(chapterNum)];
-  var meta = state.data.bible && state.data.bible._meta && state.data.bible._meta.books && state.data.bible._meta.books[bookName];
-  var totalChapters = (meta && meta.chapters) || 1;
-  $('reader-header').innerHTML = '<h2>' + escapeHtml(bookName) + '</h2><p>Chapter ' + chapterNum + '</p>';
-  var container = $('verse-container');
+
+  const bookData = state.data.bible?.[bookName];
+  const chapterData = bookData?.[String(chapterNum)];
+  const meta = state.data.bible?._meta?.books?.[bookName];
+  const totalChapters = meta?.chapters || 1;
+
+  // Reader header
+  $('reader-header').innerHTML = `
+    <h2>${bookName}</h2>
+    <p>Chapter ${chapterNum}</p>
+  `;
+
+  // Verses
+  const container = $('verse-container');
   container.innerHTML = '';
+
   if (!chapterData || Object.keys(chapterData).length === 0) {
-    container.innerHTML = '<div class="no-data-msg"><div class="nd-icon">📖</div><p><strong>' + escapeHtml(bookName) + ' ' + chapterNum + '</strong><br>Full verse content coming soon.<br>This app supports the complete Bible — ready for full data import!</p></div>';
+    container.innerHTML = `
+      <div class="no-data-msg">
+        <div class="nd-icon">📖</div>
+        <p><strong>${bookName} ${chapterNum}</strong><br>Full verse content coming soon.<br>This app is structured to support the complete Bible — just waiting for data import!</p>
+      </div>
+    `;
   } else {
-    var verses = Object.entries(chapterData).sort(function(a,b){ return Number(a[0]) - Number(b[0]); });
-    verses.forEach(function(v, idx) {
-      var row = document.createElement('div');
+    const verses = Object.entries(chapterData).sort((a, b) => Number(a[0]) - Number(b[0]));
+    verses.forEach(([num, text], idx) => {
+      const row = document.createElement('div');
       row.className = 'verse-row';
-      row.style.animationDelay = (idx * 0.03) + 's';
-      row.innerHTML = '<span class="verse-num">' + v[0] + '</span><span class="verse-text">' + escapeHtml(v[1]) + '</span>';
+      row.style.animationDelay = `${idx * 0.03}s`;
+      row.innerHTML = `
+        <span class="verse-num">${num}</span>
+        <span class="verse-text">${escapeHtml(text)}</span>
+      `;
       container.appendChild(row);
     });
   }
-  var prevBtn = $('prev-chapter');
-  var nextBtn = $('next-chapter');
+
+  // Navigation buttons
+  const prevBtn = $('prev-chapter');
+  const nextBtn = $('next-chapter');
   prevBtn.disabled = chapterNum <= 1;
   nextBtn.disabled = chapterNum >= totalChapters;
-  prevBtn.onclick = function(){ openChapter(bookName, chapterNum - 1); };
-  nextBtn.onclick = function(){ openChapter(bookName, chapterNum + 1); };
+
+  prevBtn.onclick = () => openChapter(bookName, chapterNum - 1);
+  nextBtn.onclick = () => openChapter(bookName, chapterNum + 1);
+
   showBooksView('reader');
 }
 
-var searchTimeout = null;
+/* ---------- SEARCH ---------- */
+let searchTimeout = null;
+
 function setupSearch() {
-  var input = $('search-input');
-  input.addEventListener('input', function() {
+  const input = $('search-input');
+  input.addEventListener('input', () => {
     clearTimeout(searchTimeout);
-    var q = input.value.trim();
-    if (!q) { $('search-results').innerHTML = renderSearchEmpty(); return; }
-    searchTimeout = setTimeout(function(){ performSearch(q); }, 300);
+    const q = input.value.trim();
+    if (!q) {
+      $('search-results').innerHTML = renderSearchEmpty();
+      return;
+    }
+    searchTimeout = setTimeout(() => performSearch(q), 300);
   });
   $('search-results').innerHTML = renderSearchEmpty();
 }
 
 function renderSearchEmpty() {
-  return '<div class="search-empty"><div class="se-icon">🔍</div><p>Type a word or phrase to search all Bible verses</p></div>';
+  return `<div class="search-empty"><div class="se-icon">🔍</div><p>Type a word or phrase to search all Bible verses</p></div>`;
 }
 
 function performSearch(query) {
-  var bible = state.data.bible;
+  const bible = state.data.bible;
   if (!bible) return;
-  var results = [];
-  var q = query.toLowerCase();
-  var books = Object.entries(bible);
-  for (var bi = 0; bi < books.length; bi++) {
-    if (books[bi][0] === '_meta') continue;
-    var chapters = Object.entries(books[bi][1]);
-    for (var ci = 0; ci < chapters.length; ci++) {
-      var verses = Object.entries(chapters[ci][1]);
-      for (var vi = 0; vi < verses.length; vi++) {
-        if (verses[vi][1].toLowerCase().indexOf(q) !== -1) {
-          results.push({ book: books[bi][0], chapter: chapters[ci][0], verse: verses[vi][0], text: verses[vi][1] });
+
+  const results = [];
+  const q = query.toLowerCase();
+
+  for (const [book, chapters] of Object.entries(bible)) {
+    if (book === '_meta') continue;
+    for (const [chapter, verses] of Object.entries(chapters)) {
+      for (const [verse, text] of Object.entries(verses)) {
+        if (text.toLowerCase().includes(q)) {
+          results.push({ book, chapter, verse, text });
           if (results.length >= 200) break;
         }
       }
@@ -230,117 +314,279 @@ function performSearch(query) {
     }
     if (results.length >= 200) break;
   }
-  var container = $('search-results');
+
+  const container = $('search-results');
+
   if (results.length === 0) {
-    container.innerHTML = '<div class="search-empty"><div class="se-icon">📭</div><p>No results found for &ldquo;<strong>' + escapeHtml(query) + '</strong>&rdquo;</p></div>';
+    container.innerHTML = `<div class="search-empty"><div class="se-icon">📭</div><p>No results found for "<strong>${escapeHtml(query)}</strong>"</p></div>`;
     return;
   }
-  var limited = results.length >= 200;
-  var html = '<div class="search-count">' + results.length + (limited ? '+' : '') + ' result' + (results.length !== 1 ? 's' : '') + ' for &ldquo;' + escapeHtml(query) + '&rdquo;</div>';
-  results.forEach(function(r) {
-    html += '<div class="search-result-card" data-book="' + escapeHtml(r.book) + '" data-chapter="' + r.chapter + '"><div class="src-ref">' + escapeHtml(r.book) + ' ' + r.chapter + ':' + r.verse + '</div><div class="src-text">' + highlightText(r.text, query) + '</div></div>';
+
+  const limited = results.length >= 200;
+  let html = `<div class="search-count">${results.length}${limited ? '+' : ''} result${results.length !== 1 ? 's' : ''} for "${escapeHtml(query)}"</div>`;
+
+  results.forEach((r) => {
+    html += `
+      <div class="search-result-card" data-book="${r.book}" data-chapter="${r.chapter}">
+        <div class="src-ref">${r.book} ${r.chapter}:${r.verse}</div>
+        <div class="src-text">${highlightText(r.text, query)}</div>
+      </div>
+    `;
   });
+
   container.innerHTML = html;
-  container.querySelectorAll('.search-result-card').forEach(function(card) {
-    card.addEventListener('click', function() {
+
+  // Click to open chapter
+  container.querySelectorAll('.search-result-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const book = card.dataset.book;
+      const chapter = parseInt(card.dataset.chapter);
       navigateTab('books');
-      setTimeout(function(){ openChapter(card.dataset.book, parseInt(card.dataset.chapter)); }, 100);
+      setTimeout(() => openChapter(book, chapter), 100);
     });
   });
 }
 
+/* ---------- STUDY ---------- */
 function renderStudy(section) {
   state.studySection = section;
-  $$('.study-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.study === section); });
-  var container = $('study-content');
-  var data = state.data[section];
-  if (!data) { container.innerHTML = '<div class="no-data-msg"><div class="nd-icon">\u23f3</div><p>Loading content\u2026</p></div>'; return; }
-  var icons = { goodnews: '🕊️', stories: '📜', apocalypse: '🔥', mysteries: '🌌' };
-  var html = '<div class="study-banner"><div class="study-banner-icon">' + (icons[section] || '📖') + '</div><div class="study-banner-title">' + escapeHtml(data.title) + '</div><div class="study-banner-desc">' + escapeHtml(data.subtitle || data.intro || '') + '</div></div>';
-  (data.items || []).forEach(function(item) {
-    html += '<div class="study-card"><div class="study-card-header"><div class="study-card-category">' + (item.icon || '') + ' ' + escapeHtml(item.category) + '</div><div class="study-card-title">' + escapeHtml(item.title) + '</div></div><div class="study-card-body"><div class="study-card-excerpt">' + escapeHtml(item.content) + '</div>' + (item.verse ? '<span class="study-card-ref">' + escapeHtml(item.verse) + '</span>' : '') + (item.reference ? '<span class="study-card-ref">' + escapeHtml(item.reference) + '</span>' : '') + (item.key_verse ? '<div style="margin-top:10px;font-style:italic;font-size:13px;color:var(--accent)">\u201c' + escapeHtml(item.key_verse) + '\u201d</div>' : '') + '</div></div>';
+
+  $$('.study-tab').forEach((t) => {
+    t.classList.toggle('active', t.dataset.study === section);
   });
+
+  const container = $('study-content');
+  const data = state.data[section];
+
+  if (!data) {
+    container.innerHTML = `<div class="no-data-msg"><div class="nd-icon">⏳</div><p>Loading content…</p></div>`;
+    return;
+  }
+
+  let html = `
+    <div class="study-banner">
+      <div class="study-banner-icon">${getSectionIcon(section)}</div>
+      <div class="study-banner-title">${data.title}</div>
+      <div class="study-banner-desc">${data.subtitle || data.intro || ''}</div>
+    </div>
+  `;
+
+  const items = data.items || [];
+  items.forEach((item) => {
+    html += `
+      <div class="study-card">
+        <div class="study-card-header">
+          <div class="study-card-category">${item.icon || ''} ${item.category}</div>
+          <div class="study-card-title">${escapeHtml(item.title)}</div>
+        </div>
+        <div class="study-card-body">
+          <div class="study-card-excerpt">${escapeHtml(item.content)}</div>
+          ${item.verse ? `<span class="study-card-ref">${escapeHtml(item.verse)}</span>` : ''}
+          ${item.reference ? `<span class="study-card-ref">${escapeHtml(item.reference)}</span>` : ''}
+          ${item.key_verse ? `<div style="margin-top:10px;font-style:italic;font-size:13px;color:var(--accent);">"${escapeHtml(item.key_verse)}"</div>` : ''}
+        </div>
+      </div>
+    `;
+  });
+
   container.innerHTML = html;
 }
 
+function getSectionIcon(section) {
+  const icons = { goodnews: '🕊️', stories: '📜', apocalypse: '🔥', mysteries: '🌌' };
+  return icons[section] || '📖';
+}
+
+/* ---------- THEME ---------- */
 function applyTheme(theme) {
   state.theme = theme;
   document.documentElement.setAttribute('data-theme', theme);
-  var isDark = theme === 'dark';
+
+  const isDark = theme === 'dark';
   $('icon-sun').classList.toggle('hidden', isDark);
   $('icon-moon').classList.toggle('hidden', !isDark);
-  $('toggle-theme-switch').classList.toggle('active', isDark);
-  $('toggle-theme-switch').setAttribute('aria-checked', isDark);
-  var m = document.getElementById('meta-theme-color');
-  if (m) m.content = isDark ? '#1a1040' : '#f8f4ec';
+
+  const switchEl = $('toggle-theme-switch');
+  switchEl.classList.toggle('active', isDark);
+  switchEl.setAttribute('aria-checked', isDark);
+
+  // Update meta theme-color
+  const metaTheme = document.getElementById('meta-theme-color');
+  if (metaTheme) {
+    metaTheme.content = isDark ? '#1a1040' : '#f8f4ec';
+  }
+
   localStorage.setItem('bible-theme', theme);
 }
 
+function toggleTheme() {
+  applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+}
+
+/* ---------- FONT SIZE ---------- */
 function applyFontSize(size) {
   state.fontSize = size;
-  document.documentElement.style.setProperty('--font-size-verse', size + 'px');
-  $('font-size-val').textContent = size + 'px';
+  document.documentElement.style.setProperty('--font-size-verse', `${size}px`);
+  $('font-size-val').textContent = `${size}px`;
   localStorage.setItem('bible-fontsize', size);
 }
 
-function registerServiceWorker() {
+/* ---------- PWA: SERVICE WORKER & INSTALL ---------- */
+async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  navigator.serviceWorker.register('service-worker.js').catch(function(e){ console.warn('SW failed:', e); });
+  try {
+    const base = './';
+    const swUrl = `${base}service-worker.js`.replace('//', '/');
+    const reg = await navigator.serviceWorker.register(swUrl);
+    reg.addEventListener('updatefound', () => {
+      const worker = reg.installing;
+      worker?.addEventListener('statechange', () => {
+        if (worker.statechange === 'installed' && navigator.serviceWorker.controller) {
+          showToast('App updated! Refresh for the latest version.');
+        }
+      });
+    });
+  } catch (e) {
+    console.warn('Service worker registration failed:', e);
+  }
 }
 
 function setupInstallPrompt() {
-  window.addEventListener('beforeinstallprompt', function(e) {
+  window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     state.installPrompt = e;
+    $('btn-install').style.display = 'block';
   });
-  $('btn-install').addEventListener('click', function() {
-    if (!state.installPrompt) { showToast('Open in Chrome or Safari to install'); return; }
+
+  $('btn-install').addEventListener('click', async () => {
+    if (!state.installPrompt) {
+      showToast('Open this page in Chrome/Safari to install');
+      return;
+    }
     state.installPrompt.prompt();
-    state.installPrompt.userChoice.then(function(r){ if (r.outcome === 'accepted') showToast('Holy Bible installed!'); state.installPrompt = null; });
+    const { outcome } = await state.installPrompt.userChoice;
+    if (outcome === 'accepted') showToast('Holy Bible installed!');
+    state.installPrompt = null;
   });
 }
 
+/* ---------- QUICK CARD & EXPLORE CLICKS ---------- */
+function setupHomeActions() {
+  $$('.quick-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const book = card.dataset.book;
+      const chapter = parseInt(card.dataset.chapter);
+      if (book && chapter) {
+        navigateTab('books');
+        setTimeout(() => openChapter(book, chapter), 50);
+      }
+    });
+  });
+
+  $$('.explore-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      if (card.dataset.tab) {
+        navigateTab(card.dataset.tab);
+      } else if (card.dataset.study) {
+        navigateTab('study');
+        setTimeout(() => renderStudy(card.dataset.study), 50);
+      }
+    });
+  });
+}
+
+/* ---------- EVENT WIRING ---------- */
 function wireEvents() {
-  $$('.nav-btn').forEach(function(btn){ btn.addEventListener('click', function(){ navigateTab(btn.dataset.tab); }); });
+  // Bottom nav
+  $$('.nav-btn').forEach((btn) => {
+    btn.addEventListener('click', () => navigateTab(btn.dataset.tab));
+  });
+
+  // Back button
   $('btn-back').addEventListener('click', goBack);
-  $('btn-theme').addEventListener('click', function(){ applyTheme(state.theme === 'dark' ? 'light' : 'dark'); });
-  $('toggle-theme-switch').addEventListener('click', function(){ applyTheme(state.theme === 'dark' ? 'light' : 'dark'); });
-  $('font-decrease').addEventListener('click', function(){ if (state.fontSize > 12) applyFontSize(state.fontSize - 2); });
-  $('font-increase').addEventListener('click', function(){ if (state.fontSize < 28) applyFontSize(state.fontSize + 2); });
-  $$('.study-tab').forEach(function(tab){ tab.addEventListener('click', function(){ renderStudy(tab.dataset.study); }); });
-  $$('.quick-card').forEach(function(card){
-    card.addEventListener('click', function(){
-      var book = card.dataset.book; var chapter = parseInt(card.dataset.chapter);
-      if (book && chapter) { navigateTab('books'); setTimeout(function(){ openChapter(book, chapter); }, 50); }
-    });
+
+  // Theme buttons
+  $('btn-theme').addEventListener('click', toggleTheme);
+  $('toggle-theme-switch').addEventListener('click', toggleTheme);
+
+  // Font size
+  $('font-decrease').addEventListener('click', () => {
+    if (state.fontSize > 12) applyFontSize(state.fontSize - 2);
   });
-  $$('.explore-card').forEach(function(card){
-    card.addEventListener('click', function(){
-      if (card.dataset.tab) { navigateTab(card.dataset.tab); }
-      else if (card.dataset.study) { navigateTab('study'); setTimeout(function(){ renderStudy(card.dataset.study); }, 50); }
-    });
+  $('font-increase').addEventListener('click', () => {
+    if (state.fontSize < 28) applyFontSize(state.fontSize + 2);
   });
+
+  // Study tabs
+  $$('.study-tab').forEach((tab) => {
+    tab.addEventListener('click', () => renderStudy(tab.dataset.study));
+  });
+
+  // Home explore/quick cards
+  setupHomeActions();
+
+  // Install
   setupInstallPrompt();
-  window.addEventListener('offline', function(){ showToast('\uD83D\uDCF5 You are offline — reading cached content'); });
-  window.addEventListener('online', function(){ showToast('\u2705 Back online'); });
 }
 
+/* ---------- OFFLINE DETECTION ---------- */
+function setupOfflineDetection() {
+  window.addEventListener('offline', () => showToast('📵 You are offline — reading cached content'));
+  window.addEventListener('online', () => showToast('✅ Back online'));
+}
+
+/* ---------- URL PARAMS ---------- */
+function handleUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  const book = params.get('book');
+  const chapter = params.get('chapter');
+
+  if (tab) navigateTab(tab);
+  if (book && chapter) {
+    navigateTab('books');
+    setTimeout(() => openChapter(book, parseInt(chapter)), 200);
+  }
+}
+
+/* ---------- INIT ---------- */
 async function init() {
-  var savedTheme = localStorage.getItem('bible-theme') || 'dark';
-  var savedFontSize = parseInt(localStorage.getItem('bible-fontsize') || '18');
+  // Load saved preferences
+  const savedTheme = localStorage.getItem('bible-theme') || 'dark';
+  const savedFontSize = parseInt(localStorage.getItem('bible-fontsize') || '18');
+
   applyTheme(savedTheme);
   applyFontSize(savedFontSize);
+
+  // Wire all events
   wireEvents();
   setupSearch();
+  setupOfflineDetection();
+
+  // Load all data
   await loadData();
+
+  // Set daily verse & render home
   setDailyVerse();
-  renderStudy('goodnews');
+
+  // Register service worker
   registerServiceWorker();
-  var splash = $('splash');
-  var app = $('app');
+
+  // Handle URL params
+  handleUrlParams();
+
+  // Initial study render
+  renderStudy('goodnews');
+
+  // Hide splash, show app
+  const splash = $('splash');
+  const app = $('app');
+
   splash.classList.add('fade-out');
   app.classList.remove('hidden');
-  setTimeout(function(){ splash.remove(); }, 700);
+
+  setTimeout(() => splash.remove(), 700);
 }
 
+// Start the app
 document.addEventListener('DOMContentLoaded', init);
