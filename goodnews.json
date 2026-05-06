@@ -1,0 +1,86 @@
+{
+  "title": "Good News",
+  "subtitle": "Daily Encouragement from God's Word",
+  "items": [
+    {
+      "id": 1,
+      "category": "Salvation",
+      "title": "The Greatest Gift",
+      "content": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life. This is the central message of the Gospel — the Good News that Jesus Christ came to save sinners and give eternal life to all who believe.",
+      "verse": "John 3:16",
+      "icon": "🎁"
+    },
+    {
+      "id": 2,
+      "category": "Hope",
+      "title": "New Every Morning",
+      "content": "It is of the LORD's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness. Every day is a new opportunity to experience God's mercy and grace. No matter what happened yesterday, His mercies are fresh today.",
+      "verse": "Lamentations 3:22-23",
+      "icon": "🌅"
+    },
+    {
+      "id": 3,
+      "category": "Strength",
+      "title": "He Gives Power to the Faint",
+      "content": "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint. When you feel exhausted and overwhelmed, God promises to renew your strength. Wait on Him — rest in His presence — and He will lift you up.",
+      "verse": "Isaiah 40:31",
+      "icon": "🦅"
+    },
+    {
+      "id": 4,
+      "category": "Peace",
+      "title": "The Peace That Passes Understanding",
+      "content": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus. In a world full of anxiety and uncertainty, God offers a supernatural peace that transcends human comprehension.",
+      "verse": "Philippians 4:6-7",
+      "icon": "🕊️"
+    },
+    {
+      "id": 5,
+      "category": "Purpose",
+      "title": "All Things Work Together",
+      "content": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose. Even in your darkest seasons — your disappointments, losses, and failures — God is working all things together for your good. Trust His plan.",
+      "verse": "Romans 8:28",
+      "icon": "✨"
+    },
+    {
+      "id": 6,
+      "category": "Forgiveness",
+      "title": "As Far as the East from the West",
+      "content": "As far as the east is from the west, so far hath he removed our transgressions from us. When God forgives, He forgives completely. He does not hold your sins over you. Through the blood of Jesus Christ, every sin is washed away — completely, totally, forever.",
+      "verse": "Psalm 103:12",
+      "icon": "🌊"
+    },
+    {
+      "id": 7,
+      "category": "Provision",
+      "title": "My God Shall Supply All Your Need",
+      "content": "But my God shall supply all your need according to his riches in glory by Christ Jesus. God is not limited by your bank account, your circumstances, or the economy. He owns everything, and He promises to meet every need you have — spiritually, emotionally, physically, and financially.",
+      "verse": "Philippians 4:19",
+      "icon": "🌾"
+    },
+    {
+      "id": 8,
+      "category": "Courage",
+      "title": "Be Strong and Courageous",
+      "content": "Have not I commanded thee? Be strong and courageous. Be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest. God does not call the equipped — He equips the called. Whatever you face today, you do not face it alone.",
+      "verse": "Joshua 1:9",
+      "icon": "🛡️"
+    },
+    {
+      "id": 9,
+      "category": "Identity",
+      "title": "You Are Fearfully and Wonderfully Made",
+      "content": "I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well. You are not an accident. You are not a mistake. God designed you with intention, purpose, and love. You are His masterpiece.",
+      "verse": "Psalm 139:14",
+      "icon": "👑"
+    },
+    {
+      "id": 10,
+      "category": "Daily Walk",
+      "title": "Trust in the Lord with All Your Heart",
+      "content": "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths. You do not need to have all the answers. You do not need to figure everything out. Trust God completely and He will guide every step of your journey.",
+      "verse": "Proverbs 3:5-6",
+      "icon": "🗺️"
+    }
+  ]
+}
