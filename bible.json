@@ -1,0 +1,301 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "translation": "KJV",
+    "books": {
+      "Genesis": { "testament": "OT", "chapters": 50, "order": 1 },
+      "Exodus": { "testament": "OT", "chapters": 40, "order": 2 },
+      "Leviticus": { "testament": "OT", "chapters": 27, "order": 3 },
+      "Numbers": { "testament": "OT", "chapters": 36, "order": 4 },
+      "Deuteronomy": { "testament": "OT", "chapters": 34, "order": 5 },
+      "Joshua": { "testament": "OT", "chapters": 24, "order": 6 },
+      "Judges": { "testament": "OT", "chapters": 21, "order": 7 },
+      "Ruth": { "testament": "OT", "chapters": 4, "order": 8 },
+      "1 Samuel": { "testament": "OT", "chapters": 31, "order": 9 },
+      "2 Samuel": { "testament": "OT", "chapters": 24, "order": 10 },
+      "1 Kings": { "testament": "OT", "chapters": 22, "order": 11 },
+      "2 Kings": { "testament": "OT", "chapters": 25, "order": 12 },
+      "1 Chronicles": { "testament": "OT", "chapters": 29, "order": 13 },
+      "2 Chronicles": { "testament": "OT", "chapters": 36, "order": 14 },
+      "Ezra": { "testament": "OT", "chapters": 10, "order": 15 },
+      "Nehemiah": { "testament": "OT", "chapters": 13, "order": 16 },
+      "Esther": { "testament": "OT", "chapters": 10, "order": 17 },
+      "Job": { "testament": "OT", "chapters": 42, "order": 18 },
+      "Psalms": { "testament": "OT", "chapters": 150, "order": 19 },
+      "Proverbs": { "testament": "OT", "chapters": 31, "order": 20 },
+      "Ecclesiastes": { "testament": "OT", "chapters": 12, "order": 21 },
+      "Song of Solomon": { "testament": "OT", "chapters": 8, "order": 22 },
+      "Isaiah": { "testament": "OT", "chapters": 66, "order": 23 },
+      "Jeremiah": { "testament": "OT", "chapters": 52, "order": 24 },
+      "Lamentations": { "testament": "OT", "chapters": 5, "order": 25 },
+      "Ezekiel": { "testament": "OT", "chapters": 48, "order": 26 },
+      "Daniel": { "testament": "OT", "chapters": 12, "order": 27 },
+      "Hosea": { "testament": "OT", "chapters": 14, "order": 28 },
+      "Joel": { "testament": "OT", "chapters": 3, "order": 29 },
+      "Amos": { "testament": "OT", "chapters": 9, "order": 30 },
+      "Obadiah": { "testament": "OT", "chapters": 1, "order": 31 },
+      "Jonah": { "testament": "OT", "chapters": 4, "order": 32 },
+      "Micah": { "testament": "OT", "chapters": 7, "order": 33 },
+      "Nahum": { "testament": "OT", "chapters": 3, "order": 34 },
+      "Habakkuk": { "testament": "OT", "chapters": 3, "order": 35 },
+      "Zephaniah": { "testament": "OT", "chapters": 3, "order": 36 },
+      "Haggai": { "testament": "OT", "chapters": 2, "order": 37 },
+      "Zechariah": { "testament": "OT", "chapters": 14, "order": 38 },
+      "Malachi": { "testament": "OT", "chapters": 4, "order": 39 },
+      "Matthew": { "testament": "NT", "chapters": 28, "order": 40 },
+      "Mark": { "testament": "NT", "chapters": 16, "order": 41 },
+      "Luke": { "testament": "NT", "chapters": 24, "order": 42 },
+      "John": { "testament": "NT", "chapters": 21, "order": 43 },
+      "Acts": { "testament": "NT", "chapters": 28, "order": 44 },
+      "Romans": { "testament": "NT", "chapters": 16, "order": 45 },
+      "1 Corinthians": { "testament": "NT", "chapters": 16, "order": 46 },
+      "2 Corinthians": { "testament": "NT", "chapters": 13, "order": 47 },
+      "Galatians": { "testament": "NT", "chapters": 6, "order": 48 },
+      "Ephesians": { "testament": "NT", "chapters": 6, "order": 49 },
+      "Philippians": { "testament": "NT", "chapters": 4, "order": 50 },
+      "Colossians": { "testament": "NT", "chapters": 4, "order": 51 },
+      "1 Thessalonians": { "testament": "NT", "chapters": 5, "order": 52 },
+      "2 Thessalonians": { "testament": "NT", "chapters": 3, "order": 53 },
+      "1 Timothy": { "testament": "NT", "chapters": 6, "order": 54 },
+      "2 Timothy": { "testament": "NT", "chapters": 4, "order": 55 },
+      "Titus": { "testament": "NT", "chapters": 3, "order": 56 },
+      "Philemon": { "testament": "NT", "chapters": 1, "order": 57 },
+      "Hebrews": { "testament": "NT", "chapters": 13, "order": 58 },
+      "James": { "testament": "NT", "chapters": 5, "order": 59 },
+      "1 Peter": { "testament": "NT", "chapters": 5, "order": 60 },
+      "2 Peter": { "testament": "NT", "chapters": 3, "order": 61 },
+      "1 John": { "testament": "NT", "chapters": 5, "order": 62 },
+      "2 John": { "testament": "NT", "chapters": 1, "order": 63 },
+      "3 John": { "testament": "NT", "chapters": 1, "order": 64 },
+      "Jude": { "testament": "NT", "chapters": 1, "order": 65 },
+      "Revelation": { "testament": "NT", "chapters": 22, "order": 66 }
+    }
+  },
+  "Genesis": {
+    "1": {
+      "1": "In the beginning God created the heaven and the earth.",
+      "2": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.",
+      "3": "And God said, Let there be light: and there was light.",
+      "4": "And God saw the light, that it was good: and God divided the light from the darkness.",
+      "5": "And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.",
+      "6": "And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.",
+      "7": "And God made the firmament, and divided the waters which were under the firmament from the waters which were above the firmament: and it was so.",
+      "8": "And God called the firmament Heaven. And the evening and the morning were the second day.",
+      "9": "And God said, Let the waters under the heaven be gathered together unto one place, and let the dry land appear: and it was so.",
+      "10": "And God called the dry land Earth; and the gathering together of the waters called he Seas: and God saw that it was good.",
+      "11": "And God said, Let the earth bring forth grass, the herb yielding seed, and the fruit tree yielding fruit after his kind, whose seed is in itself, upon the earth: and it was so.",
+      "12": "And the earth brought forth grass, and herb yielding seed after his kind, and the tree yielding fruit, whose seed was in itself, after his kind: and God saw that it was good.",
+      "13": "And the evening and the morning were the third day.",
+      "14": "And God said, Let there be lights in the firmament of the heaven to divide the day from the night; and let them be for signs, and for seasons, and for days, and years:",
+      "15": "And let them be for lights in the firmament of the heaven to give light upon the earth: and it was so.",
+      "16": "And God made two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also.",
+      "17": "And God set them in the firmament of the heaven to give light upon the earth,",
+      "18": "And to rule over the day and over the night, and to divide the light from the darkness: and God saw that it was good.",
+      "19": "And the evening and the morning were the fourth day.",
+      "20": "And God said, Let the waters bring forth abundantly the moving creature that hath life, and fowl that may fly above the earth in the open firmament of heaven.",
+      "21": "And God created great whales, and every living creature that moveth, which the waters brought forth abundantly, after their kind, and every winged fowl after his kind: and God saw that it was good.",
+      "22": "And God blessed them, saying, Be fruitful, and multiply, and fill the waters in the seas, and let fowl multiply in the earth.",
+      "23": "And the evening and the morning were the fifth day.",
+      "24": "And God said, Let the earth bring forth the living creature after his kind, cattle, and creeping thing, and beast of the earth after his kind: and it was so.",
+      "25": "And God made the beast of the earth after his kind, and cattle after their kind, and every thing that creepeth upon the earth after his kind: and God saw that it was good.",
+      "26": "And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.",
+      "27": "So God created man in his own image, in the image of God created he him; male and female created he them.",
+      "28": "And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth.",
+      "29": "And God said, Behold, I have given you every herb bearing seed, which is upon the face of all the earth, and every tree, in the which is the fruit of a tree yielding seed; to you it shall be for meat.",
+      "30": "And to every beast of the earth, and to every fowl of the air, and to every thing that creepeth upon the earth, wherein there is life, I have given every green herb for meat: and it was so.",
+      "31": "And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day."
+    },
+    "2": {
+      "1": "Thus the heavens and the earth were finished, and all the host of them.",
+      "2": "And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made.",
+      "3": "And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made.",
+      "4": "These are the generations of the heavens and of the earth when they were created, in the day that the LORD God made the earth and the heavens,",
+      "5": "And every plant of the field before it was in the earth, and every herb of the field before it grew: for the LORD God had not caused it to rain upon the earth, and there was not a man to till the ground.",
+      "6": "But there went up a mist from the earth, and watered the whole face of the ground.",
+      "7": "And the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
+      "8": "And the LORD God planted a garden eastward in Eden; and there he put the man whom he had formed."
+    },
+    "3": {
+      "1": "Now the serpent was more subtil than any beast of the field which the LORD God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?",
+      "2": "And the woman said unto the serpent, We may eat of the fruit of the trees of the garden:",
+      "3": "But of the fruit of the tree which is in the midst of the garden, God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+      "4": "And the serpent said unto the woman, Ye shall not surely die:",
+      "5": "For God doth know that in the day ye eat thereof, then your eyes shall be opened, and ye shall be as gods, knowing good and evil.",
+      "6": "And when the woman saw that the tree was good for food, and that it was pleasant to the eyes, and a tree to be desired to make one wise, she took of the fruit thereof, and did eat, and gave also unto her husband with her; and he did eat."
+    }
+  },
+  "Psalms": {
+    "1": {
+      "1": "Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful.",
+      "2": "But his delight is in the law of the LORD; and in his law doth he meditate day and night.",
+      "3": "And he shall be like a tree planted by the rivers of water, that bringeth forth his fruit in his season; his leaf also shall not wither; and whatsoever he doeth shall prosper.",
+      "4": "The ungodly are not so: but are like the chaff which the wind driveth away.",
+      "5": "Therefore the ungodly shall not stand in the judgment, nor sinners in the congregation of the righteous.",
+      "6": "For the LORD knoweth the way of the righteous: but the way of the ungodly shall perish."
+    },
+    "23": {
+      "1": "The LORD is my shepherd; I shall not want.",
+      "2": "He maketh me to lie down in green pastures: he leadeth me beside the still waters.",
+      "3": "He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.",
+      "4": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.",
+      "5": "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.",
+      "6": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever."
+    },
+    "46": {
+      "1": "God is our refuge and strength, a very present help in trouble.",
+      "2": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;",
+      "3": "Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof. Selah.",
+      "10": "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth."
+    },
+    "119": {
+      "105": "Thy word is a lamp unto my feet, and a light unto my path.",
+      "130": "The entrance of thy words giveth light; it giveth understanding unto the simple."
+    }
+  },
+  "Proverbs": {
+    "3": {
+      "1": "My son, forget not my law; but let thine heart keep my commandments:",
+      "2": "For length of days, and long life, and peace, shall they add to thee.",
+      "3": "Let not mercy and truth forsake thee: bind them about thy neck; write them upon the table of thine heart:",
+      "4": "So shalt thou find favour and good understanding in the sight of God and man.",
+      "5": "Trust in the LORD with all thine heart; and lean not unto thine own understanding.",
+      "6": "In all thy ways acknowledge him, and he shall direct thy paths.",
+      "7": "Be not wise in thine own eyes: fear the LORD, and depart from evil.",
+      "8": "It shall be health to thy navel, and marrow to thy bones."
+    }
+  },
+  "Isaiah": {
+    "40": {
+      "28": "Hast thou not known? hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary? there is no searching of his understanding.",
+      "29": "He giveth power to the faint; and to them that have no might he increaseth strength.",
+      "30": "Even the youths shall faint and be weary, and the young men shall utterly fall:",
+      "31": "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint."
+    }
+  },
+  "Matthew": {
+    "1": {
+      "1": "The book of the generation of Jesus Christ, the son of David, the son of Abraham.",
+      "2": "Abraham begat Isaac; and Isaac begat Jacob; and Jacob begat Judas and his brethren;",
+      "3": "And Judas begat Phares and Zara of Thamar; and Phares begat Esrom; and Esrom begat Aram;",
+      "4": "And Aram begat Aminadab; and Aminadab begat Naasson; and Naasson begat Salmon;",
+      "5": "And Salmon begat Booz of Rachab; and Booz begat Obed of Ruth; and Obed begat Jesse;",
+      "6": "And Jesse begat David the king; and David the king begat Solomon of her that had been the wife of Urias;",
+      "7": "And Solomon begat Roboam; and Roboam begat Abia; and Abia begat Asa;",
+      "8": "And Asa begat Josaphat; and Josaphat begat Joram; and Joram begat Ozias;",
+      "9": "And Ozias begat Joatham; and Joatham begat Achaz; and Achaz begat Ezekias;",
+      "10": "And Ezekias begat Manasses; and Manasses begat Amon; and Amon begat Josias;",
+      "11": "And Josias begat Jechonias and his brethren, about the time they were carried away to Babylon:",
+      "12": "And after they were brought to Babylon, Jechonias begat Salathiel; and Salathiel begat Zorobabel;",
+      "13": "And Zorobabel begat Abiud; and Abiud begat Eliakim; and Eliakim begat Azor;",
+      "14": "And Azor begat Sadoc; and Sadoc begat Achim; and Achim begat Eliud;",
+      "15": "And Eliud begat Eleazar; and Eleazar begat Matthan; and Matthan begat Jacob;",
+      "16": "And Jacob begat Joseph the husband of Mary, of whom was born Jesus, who is called Christ.",
+      "17": "So all the generations from Abraham to David are fourteen generations; and from David until the carrying away into Babylon are fourteen generations; and from the carrying away into Babylon unto Christ are fourteen generations.",
+      "18": "Now the birth of Jesus Christ was on this wise: When as his mother Mary had been espoused to Joseph, before they came together, she was found with child of the Holy Ghost.",
+      "19": "Then Joseph her husband, being a just man, and not willing to make her a publick example, was minded to put her away privily.",
+      "20": "But while he thought on these things, behold, the angel of the LORD appeared unto him in a dream, saying, Joseph, thou son of David, fear not to take unto thee Mary thy wife: for that which is conceived in her is of the Holy Ghost.",
+      "21": "And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
+      "22": "Now all this was done, that it might be fulfilled which was spoken of the Lord by the prophet, saying,",
+      "23": "Behold, a virgin shall be with child, and shall bring forth a son, and they shall call his name Emmanuel, which being interpreted is, God with us.",
+      "24": "Then Joseph being raised from sleep did as the angel of the Lord had bidden him, and took unto him his wife:",
+      "25": "And knew her not till she had brought forth her firstborn son: and he called his name JESUS."
+    },
+    "5": {
+      "1": "And seeing the multitudes, he went up into a mountain: and when he was set, his disciples came unto him:",
+      "2": "And he opened his mouth, and taught them, saying,",
+      "3": "Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
+      "4": "Blessed are they that mourn: for they shall be comforted.",
+      "5": "Blessed are the meek: for they shall inherit the earth.",
+      "6": "Blessed are they which do hunger and thirst after righteousness: for they shall be filled.",
+      "7": "Blessed are the merciful: for they shall obtain mercy.",
+      "8": "Blessed are the pure in heart: for they shall see God.",
+      "9": "Blessed are the peacemakers: for they shall be called the children of God.",
+      "10": "Blessed are they which are persecuted for righteousness' sake: for theirs is the kingdom of heaven.",
+      "11": "Blessed are ye, when men shall revile you, and persecute you, and shall say all manner of evil against you falsely, for my sake.",
+      "12": "Rejoice, and be exceeding glad: for great is your reward in heaven: for so persecuted they the prophets which were before you.",
+      "13": "Ye are the salt of the earth: but if the salt have lost his savour, wherewith shall it be salted? it is thenceforth good for nothing, but to be cast out, and to be trodden under foot of men.",
+      "14": "Ye are the light of the world. A city that is set on an hill cannot be hid.",
+      "15": "Neither do men light a candle, and put it under a bushel, but on a candlestick; and it giveth light unto all that are in the house.",
+      "16": "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven."
+    },
+    "6": {
+      "9": "After this manner therefore pray ye: Our Father which art in heaven, Hallowed be thy name.",
+      "10": "Thy kingdom come. Thy will be done in earth, as it is in heaven.",
+      "11": "Give us this day our daily bread.",
+      "12": "And forgive us our debts, as we forgive our debtors.",
+      "13": "And lead us not into temptation, but deliver us from evil: For thine is the kingdom, and the power, and the glory, for ever. Amen.",
+      "33": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you."
+    }
+  },
+  "John": {
+    "1": {
+      "1": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "2": "The same was in the beginning with God.",
+      "3": "All things were made by him; and without him was not any thing made that was made.",
+      "4": "In him was life; and the life was the light of men.",
+      "5": "And the light shineth in darkness; and the darkness comprehended it not.",
+      "14": "And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth."
+    },
+    "3": {
+      "1": "There was a man of the Pharisees, named Nicodemus, a ruler of the Jews:",
+      "2": "The same came to Jesus by night, and said unto him, Rabbi, we know that thou art a teacher come from God: for no man can do these miracles that thou doest, except God be with him.",
+      "3": "Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.",
+      "4": "Nicodemus saith unto him, How can a man be born when he is old? can he enter the second time into his mother's womb, and be born?",
+      "5": "Jesus answered, Verily, verily, I say unto thee, Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God.",
+      "6": "That which is born of the flesh is flesh; and that which is born of the Spirit is spirit.",
+      "7": "Marvel not that I said unto thee, Ye must be born again.",
+      "8": "The wind bloweth where it listeth, and thou hearest the sound thereof, but canst not tell whence it cometh, and whither it goeth: so is every one that is born of the Spirit.",
+      "14": "And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up:",
+      "15": "That whosoever believeth in him should not perish, but have eternal life.",
+      "16": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+      "17": "For God sent not his Son into the world to condemn the world; but that the world through him might be saved.",
+      "18": "He that believeth on him is not condemned: but he that believeth not is condemned already, because he hath not believed in the name of the only begotten Son of God."
+    }
+  },
+  "Romans": {
+    "8": {
+      "28": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+      "31": "What shall we then say to these things? If God be for us, who can be against us?",
+      "38": "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come,",
+      "39": "Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord."
+    }
+  },
+  "Philippians": {
+    "4": {
+      "4": "Rejoice in the Lord alway: and again I say, Rejoice.",
+      "6": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+      "7": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+      "13": "I can do all things through Christ which strengtheneth me."
+    }
+  },
+  "Revelation": {
+    "1": {
+      "1": "The Revelation of Jesus Christ, which God gave unto him, to shew unto his servants things which must shortly come to pass; and he sent and signified it by his angel unto his servant John:",
+      "2": "Who bare record of the word of God, and of the testimony of Jesus Christ, and of all things that he saw.",
+      "3": "Blessed is he that readeth, and they that hear the words of this prophecy, and keep those things which are written therein: for the time is at hand.",
+      "4": "John to the seven churches which are in Asia: Grace be unto you, and peace, from him which is, and which was, and which is to come; and from the seven Spirits which are before his throne;",
+      "5": "And from Jesus Christ, who is the faithful witness, and the first begotten of the dead, and the prince of the kings of the earth. Unto him that loved us, and washed us from our sins in his own blood,",
+      "6": "And hath made us kings and priests unto God and his Father; to him be glory and dominion for ever and ever. Amen.",
+      "7": "Behold, he cometh with clouds; and every eye shall see him, and they also which pierced him: and all kindreds of the earth shall wail because of him. Even so, Amen.",
+      "8": "I am Alpha and Omega, the beginning and the ending, saith the Lord, which is, and which was, and which is to come, the Almighty.",
+      "9": "I John, who also am your brother, and companion in tribulation, and in the kingdom and patience of Jesus Christ, was in the isle that is called Patmos, for the word of God, and for the testimony of Jesus Christ.",
+      "10": "I was in the Spirit on the Lord's day, and heard behind me a great voice, as of a trumpet,",
+      "11": "Saying, I am Alpha and Omega, the first and the last: and, What thou seest, write in a book, and send it unto the seven churches which are in Asia; unto Ephesus, and unto Smyrna, and unto Pergamos, and unto Thyatira, and unto Sardis, and unto Philadelphia, and unto Laodicea.",
+      "17": "And when I saw him, I fell at his feet as dead. And he laid his right hand upon me, saying unto me, Fear not; I am the first and the last:",
+      "18": "I am he that liveth, and was dead; and, behold, I am alive for evermore, Amen; and have the keys of hell and of death."
+    },
+    "21": {
+      "1": "And I saw a new heaven and a new earth: for the first heaven and the first earth were passed away; and there was no more sea.",
+      "2": "And I John saw the holy city, new Jerusalem, coming down from God out of heaven, prepared as a bride adorned for her husband.",
+      "3": "And I heard a great voice out of heaven saying, Behold, the tabernacle of God is with men, and he will dwell with them, and they shall be his people, and God himself shall be with them, and be their God.",
+      "4": "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away.",
+      "5": "And he that sat upon the throne said, Behold, I make all things new. And he said unto me, Write: for these words are true and faithful."
+    },
+    "22": {
+      "12": "And, behold, I come quickly; and my reward is with me, to give every man according as his work shall be.",
+      "13": "I am Alpha and Omega, the beginning and the end, the first and the last.",
+      "20": "He which testifieth these things saith, Surely I come quickly. Amen. Even so, come, Lord Jesus.",
+      "21": "The grace of our Lord Jesus Christ be with you all. Amen."
+    }
+  }
+}
