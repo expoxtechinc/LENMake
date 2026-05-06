@@ -7,19 +7,215 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Holy Bible" />
-  <meta name="description" content="Read the Holy Bible offline — every book, chapter, and verse. King James Version." />
-  <title>Holy Bible — KJV</title>
+  <meta name="description" content="Read the Holy Bible offline — every book, chapter, and verse." />
+  <title>Holy Bible</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<style>
+/* ===== HOLY BIBLE PWA ===== */
+:root {
+  --accent: #d4a843;
+  --accent-light: #f0c060;
+  --accent-dark: #b8892e;
+  --accent-glow: rgba(212,168,67,0.25);
+  --radius-sm: 8px; --radius-md: 14px; --radius-lg: 20px; --radius-xl: 28px;
+  --nav-height: 68px; --header-height: 60px;
+  --font-serif: 'Crimson Text', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-size-verse: 18px;
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg-primary: #0f0a1e; --bg-secondary: #1a1040; --bg-card: #1e1535; --bg-card-hover: #251d42; --bg-input: #12092a;
+  --text-primary: #f0e8d0; --text-secondary: #a8958a; --text-muted: #6b5c72; --text-accent: #d4a843;
+  --border: rgba(212,168,67,0.15); --border-card: rgba(255,255,255,0.07); --border-input: rgba(212,168,67,0.3);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4); --shadow-nav: 0 -2px 20px rgba(0,0,0,0.5);
+  --gradient-hero: linear-gradient(160deg,#1a1040 0%,#0f0a1e 60%,#1a0a30 100%);
+  --gradient-accent: linear-gradient(135deg,#d4a843 0%,#f0c060 50%,#b8892e 100%);
+  --gradient-card: linear-gradient(135deg,#1e1535 0%,#251d42 100%);
+}
+[data-theme="light"] {
+  --bg-primary: #f8f4ec; --bg-secondary: #fff9f0; --bg-card: #ffffff; --bg-card-hover: #fdf8f0; --bg-input: #fff;
+  --text-primary: #2c1a0e; --text-secondary: #7a5c3a; --text-muted: #b09070; --text-accent: #b8892e;
+  --border: rgba(184,137,46,0.2); --border-card: rgba(0,0,0,0.08); --border-input: rgba(184,137,46,0.4);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.1); --shadow-nav: 0 -2px 20px rgba(0,0,0,0.12);
+  --gradient-hero: linear-gradient(160deg,#fff3d8 0%,#ffefc0 50%,#fff8e8 100%);
+  --gradient-accent: linear-gradient(135deg,#d4a843 0%,#f0c060 50%,#b8892e 100%);
+  --gradient-card: linear-gradient(135deg,#ffffff 0%,#fdf8f0 100%);
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+html { font-size:16px; scroll-behavior:smooth; overscroll-behavior:none; }
+body { font-family:var(--font-sans); background:var(--bg-primary); color:var(--text-primary); min-height:100dvh; overflow:hidden; position:fixed; width:100%; height:100%; transition:background var(--transition),color var(--transition); }
+button { font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; transition:all var(--transition); }
+input { font-family:inherit; border:none; outline:none; background:none; color:inherit; }
+.hidden { display:none !important; }
+
+/* SPLASH */
+#splash { position:fixed; inset:0; background:var(--gradient-hero); display:flex; align-items:center; justify-content:center; z-index:1000; transition:opacity 0.6s ease,visibility 0.6s ease; }
+#splash.fade-out { opacity:0; visibility:hidden; }
+.splash-inner { text-align:center; animation:splashIn 0.8s ease-out; }
+@keyframes splashIn { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+.splash-cross { font-size:72px; line-height:1; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 20px rgba(212,168,67,0.5)); margin-bottom:16px; }
+.splash-title { font-family:var(--font-display); font-size:36px; font-weight:700; color:var(--text-primary); letter-spacing:0.05em; margin-bottom:8px; }
+.splash-subtitle { font-family:var(--font-serif); font-size:16px; color:var(--text-accent); font-style:italic; margin-bottom:40px; }
+.splash-loader { display:flex; gap:8px; justify-content:center; }
+.splash-loader span { width:8px; height:8px; border-radius:50%; background:var(--accent); animation:bounce 1.2s ease-in-out infinite; }
+.splash-loader span:nth-child(2){animation-delay:0.2s} .splash-loader span:nth-child(3){animation-delay:0.4s}
+@keyframes bounce { 0%,80%,100%{transform:scale(0.5);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+
+/* APP SHELL */
+#app { display:flex; flex-direction:column; height:100dvh; height:-webkit-fill-available; }
+
+/* HEADER */
+#app-header { display:flex; align-items:center; justify-content:space-between; height:var(--header-height); padding:0 16px; background:var(--bg-secondary); border-bottom:1px solid var(--border); position:relative; z-index:10; flex-shrink:0; }
+#header-title { display:flex; align-items:center; gap:8px; font-family:var(--font-display); font-size:18px; font-weight:600; color:var(--text-primary); position:absolute; left:50%; transform:translateX(-50%); }
+.header-cross { font-size:18px; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.btn-icon { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--text-secondary); background:var(--bg-card); border:1px solid var(--border-card); flex-shrink:0; }
+.btn-icon svg { width:20px; height:20px; }
+.btn-icon:hover,.btn-icon:active { background:var(--bg-card-hover); color:var(--accent); border-color:var(--border); transform:scale(1.05); }
+
+/* PAGES */
+#page-container { flex:1; overflow:hidden; position:relative; }
+.page { position:absolute; inset:0; display:none; flex-direction:column; }
+.page.active { display:flex; }
+.page-scroll { flex:1; overflow-y:auto; overflow-x:hidden; padding-bottom:calc(var(--nav-height) + 16px); -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+.page-scroll::-webkit-scrollbar { display:none; }
+
+/* HOME */
+.hero-banner { margin:16px 16px 0; padding:28px 24px; background:var(--gradient-hero); border:1px solid var(--border); border-radius:var(--radius-xl); text-align:center; position:relative; overflow:hidden; }
+.hero-banner::before { content:'✝'; position:absolute; top:-20px; right:-10px; font-size:120px; opacity:0.04; line-height:1; pointer-events:none; }
+.hero-verse-label { font-size:10px; font-weight:600; letter-spacing:0.15em; color:var(--accent); margin-bottom:14px; }
+.hero-verse-text { font-family:var(--font-display); font-size:17px; font-weight:400; font-style:italic; line-height:1.7; color:var(--text-primary); margin-bottom:12px; }
+.hero-verse-ref { font-family:var(--font-sans); font-size:12px; color:var(--accent); font-style:normal; font-weight:500; }
+.section-heading { font-size:11px; font-weight:600; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase; padding:20px 20px 10px; }
+.quick-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:0 16px; }
+.quick-card { display:flex; flex-direction:column; align-items:flex-start; padding:16px; background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-md); gap:4px; transition:all var(--transition); text-align:left; }
+.quick-card:active { transform:scale(0.97); background:var(--bg-card-hover); border-color:var(--border); }
+.qc-icon { font-size:22px; margin-bottom:4px; }
+.qc-title { font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--text-primary); }
+.qc-sub { font-size:11px; color:var(--text-secondary); }
+.explore-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:0 16px; }
+.explore-card { display:flex; flex-direction:column; align-items:center; gap:6px; padding:16px 8px; background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-md); transition:all var(--transition); }
+.explore-card:active { transform:scale(0.95); border-color:var(--accent); }
+.ec-icon { font-size:26px; }
+.ec-label { font-size:11px; font-weight:500; color:var(--text-secondary); text-align:center; }
+
+/* BOOKS */
+.testament-section { padding:8px 0; }
+.testament-label { font-size:11px; font-weight:700; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase; padding:12px 20px 8px; border-bottom:1px solid var(--border); margin-bottom:8px; }
+.books-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; padding:8px 14px; }
+.book-btn { display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-md); transition:all var(--transition); text-align:left; }
+.book-btn:active { transform:scale(0.97); border-color:var(--accent); background:var(--bg-card-hover); }
+.book-btn-num { width:28px; height:28px; border-radius:50%; background:var(--gradient-accent); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#1a1040; flex-shrink:0; }
+.book-btn-name { font-size:13px; font-weight:500; color:var(--text-primary); line-height:1.3; }
+.book-btn-chapters { font-size:10px; color:var(--text-muted); }
+.chapter-book-title { font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--text-primary); padding:24px 20px 8px; text-align:center; }
+.chapter-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding:16px; }
+.chapter-btn { aspect-ratio:1; border-radius:var(--radius-md); background:var(--bg-card); border:1px solid var(--border-card); font-size:14px; font-weight:500; color:var(--text-primary); display:flex; align-items:center; justify-content:center; transition:all var(--transition); }
+.chapter-btn:active { transform:scale(0.92); background:var(--accent); color:#1a1040; border-color:var(--accent); }
+.chapter-btn.has-data { border-color:var(--accent-dark); position:relative; }
+.chapter-btn.has-data::after { content:''; position:absolute; bottom:4px; left:50%; transform:translateX(-50%); width:4px; height:4px; border-radius:50%; background:var(--accent); }
+.reader-header { padding:16px 20px 8px; border-bottom:1px solid var(--border); text-align:center; }
+.reader-header h2 { font-family:var(--font-display); font-size:20px; font-weight:700; color:var(--text-primary); }
+.reader-header p { font-size:12px; color:var(--text-accent); margin-top:2px; }
+.verse-container { padding:16px 20px; }
+.verse-row { display:flex; gap:12px; margin-bottom:16px; padding:12px 0; border-bottom:1px solid var(--border-card); animation:fadeIn 0.3s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.verse-num { font-size:11px; font-weight:700; color:var(--accent); min-width:24px; padding-top:4px; }
+.verse-text { font-family:var(--font-serif); font-size:var(--font-size-verse); line-height:1.8; color:var(--text-primary); }
+.no-data-msg { text-align:center; padding:48px 24px; color:var(--text-muted); }
+.no-data-msg .nd-icon { font-size:48px; margin-bottom:12px; }
+.no-data-msg p { font-size:14px; line-height:1.6; }
+.no-data-msg strong { color:var(--accent); }
+.reader-nav { display:flex; gap:12px; padding:16px 20px; border-top:1px solid var(--border); }
+.reader-nav-btn { flex:1; padding:12px; border-radius:var(--radius-md); background:var(--bg-card); border:1px solid var(--border-card); font-size:14px; font-weight:500; color:var(--text-primary); transition:all var(--transition); }
+.reader-nav-btn:active { background:var(--accent); color:#1a1040; border-color:var(--accent); transform:scale(0.97); }
+.reader-nav-btn:disabled { opacity:0.3; cursor:not-allowed; }
+
+/* SEARCH */
+.search-bar-wrap { padding:16px 16px 8px; position:sticky; top:0; background:var(--bg-primary); z-index:5; }
+.search-bar { display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--bg-card); border:1.5px solid var(--border-input); border-radius:var(--radius-xl); }
+.search-icon { width:18px; height:18px; color:var(--text-muted); flex-shrink:0; }
+#search-input { flex:1; font-size:16px; color:var(--text-primary); background:none; }
+#search-input::placeholder { color:var(--text-muted); }
+#search-results { padding:0 16px 16px; }
+.search-empty { text-align:center; padding:60px 24px; color:var(--text-muted); }
+.search-empty .se-icon { font-size:48px; margin-bottom:12px; }
+.search-empty p { font-size:14px; }
+.search-count { font-size:12px; color:var(--text-muted); padding:8px 4px 12px; font-weight:500; }
+.search-result-card { background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-md); padding:14px 16px; margin-bottom:8px; cursor:pointer; transition:all var(--transition); }
+.search-result-card:active { transform:scale(0.98); border-color:var(--accent); }
+.src-ref { font-size:11px; font-weight:700; color:var(--accent); letter-spacing:0.05em; margin-bottom:6px; }
+.src-text { font-family:var(--font-serif); font-size:15px; line-height:1.6; color:var(--text-primary); }
+.src-text mark { background:rgba(212,168,67,0.35); color:var(--accent-light); border-radius:2px; padding:0 2px; }
+
+/* STUDY */
+.study-tabs { display:flex; border-bottom:1px solid var(--border); background:var(--bg-secondary); overflow-x:auto; }
+.study-tabs::-webkit-scrollbar { display:none; }
+.study-tab { padding:14px 18px; font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap; border-bottom:2.5px solid transparent; transition:all var(--transition); }
+.study-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+#study-content { padding:16px; }
+.study-card { background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-lg); margin-bottom:14px; overflow:hidden; }
+.study-card-header { padding:18px 20px 0; }
+.study-card-category { font-size:10px; font-weight:700; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.study-card-title { font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); line-height:1.3; margin-bottom:10px; }
+.study-card-body { padding:0 20px 18px; }
+.study-card-excerpt { font-family:var(--font-serif); font-size:15px; line-height:1.7; color:var(--text-secondary); }
+.study-card-ref { display:inline-block; margin-top:12px; font-size:11px; font-weight:600; color:var(--accent); letter-spacing:0.05em; padding:4px 10px; border:1px solid var(--border); border-radius:100px; }
+.study-banner { text-align:center; padding:24px; margin-bottom:16px; background:var(--gradient-hero); border:1px solid var(--border); border-radius:var(--radius-xl); }
+.study-banner-icon { font-size:40px; margin-bottom:10px; }
+.study-banner-title { font-family:var(--font-display); font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom:6px; }
+.study-banner-desc { font-size:13px; color:var(--text-secondary); line-height:1.5; }
+
+/* SETTINGS */
+.settings-section { padding:20px 20px 0; margin-bottom:8px; }
+.settings-title { font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase; margin-bottom:12px; }
+.setting-row { display:flex; align-items:center; justify-content:space-between; padding:16px 18px; background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-md); margin-bottom:8px; }
+.setting-label { font-size:15px; font-weight:500; color:var(--text-primary); }
+.toggle-switch { width:50px; height:28px; border-radius:100px; background:var(--bg-input); border:1.5px solid var(--border-card); position:relative; transition:all var(--transition); cursor:pointer; }
+.toggle-switch.active { background:var(--accent); border-color:var(--accent); }
+.toggle-knob { position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:white; transition:all var(--transition); box-shadow:0 1px 4px rgba(0,0,0,0.3); }
+.toggle-switch.active .toggle-knob { left:calc(100% - 21px); }
+.font-size-control { display:flex; align-items:center; gap:12px; }
+.font-btn { width:36px; height:36px; border-radius:var(--radius-sm); background:var(--bg-primary); border:1px solid var(--border-card); font-size:13px; font-weight:700; color:var(--text-primary); display:flex; align-items:center; justify-content:center; }
+.font-btn:active { background:var(--accent); color:#1a1040; border-color:var(--accent); transform:scale(0.92); }
+#font-size-val { font-size:13px; font-weight:600; color:var(--accent); min-width:32px; text-align:center; }
+.about-card { padding:28px 20px; background:var(--gradient-hero); border:1px solid var(--border); border-radius:var(--radius-xl); text-align:center; }
+.about-cross { font-size:40px; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+.about-title { font-family:var(--font-display); font-size:22px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+.about-desc { font-size:13px; color:var(--accent); font-weight:500; margin-bottom:12px; }
+.about-text { font-size:13px; line-height:1.7; color:var(--text-secondary); margin-bottom:12px; }
+.about-version { font-size:11px; color:var(--text-muted); }
+.install-card { padding:20px; background:var(--bg-card); border:1px solid var(--border-card); border-radius:var(--radius-lg); }
+.install-text { font-size:13px; line-height:1.6; color:var(--text-secondary); margin-bottom:14px; }
+.btn-install { width:100%; padding:14px; border-radius:var(--radius-md); background:var(--gradient-accent); color:#1a1040; font-size:15px; font-weight:700; letter-spacing:0.02em; transition:all var(--transition); }
+.btn-install:active { transform:scale(0.97); opacity:0.9; }
+
+/* BOTTOM NAV */
+#bottom-nav { display:flex; background:var(--bg-secondary); border-top:1px solid var(--border); box-shadow:var(--shadow-nav); height:var(--nav-height); padding-bottom:env(safe-area-inset-bottom,0px); flex-shrink:0; z-index:10; }
+.nav-btn { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:8px 4px; color:var(--text-muted); position:relative; transition:all var(--transition); }
+.nav-btn svg { width:22px; height:22px; transition:all var(--transition); }
+.nav-btn span { font-size:10px; font-weight:500; letter-spacing:0.02em; }
+.nav-btn.active { color:var(--accent); }
+.nav-btn.active svg { filter:drop-shadow(0 0 6px var(--accent-glow)); }
+.nav-btn.active::before { content:''; position:absolute; top:0; left:20%; right:20%; height:2.5px; background:var(--gradient-accent); border-radius:0 0 4px 4px; }
+
+/* TOAST */
+.toast { position:fixed; bottom:calc(var(--nav-height) + 12px); left:50%; transform:translateX(-50%) translateY(20px); background:var(--bg-card); border:1px solid var(--border); border-radius:100px; padding:10px 20px; font-size:13px; font-weight:500; color:var(--text-primary); box-shadow:var(--shadow-card); z-index:999; opacity:0; transition:all 0.35s ease; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* RESPONSIVE */
+@media(min-width:480px){.quick-grid{grid-template-columns:repeat(3,1fr)}.chapter-grid{grid-template-columns:repeat(7,1fr)}.books-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.books-grid{grid-template-columns:repeat(4,1fr)}.chapter-grid{grid-template-columns:repeat(10,1fr)}.explore-grid{grid-template-columns:repeat(6,1fr)}}
+</style>
 </head>
 <body>
 
-  <!-- SPLASH SCREEN -->
   <div id="splash">
     <div class="splash-inner">
       <div class="splash-cross">✝</div>
@@ -29,10 +225,8 @@
     </div>
   </div>
 
-  <!-- MAIN APP -->
   <div id="app" class="hidden">
 
-    <!-- TOP HEADER -->
     <header id="app-header">
       <button id="btn-back" class="btn-icon hidden" aria-label="Go back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -47,10 +241,8 @@
       </button>
     </header>
 
-    <!-- PAGE CONTAINER -->
     <main id="page-container">
 
-      <!-- HOME PAGE -->
       <div id="page-home" class="page active">
         <div class="page-scroll">
           <div class="hero-banner">
@@ -60,78 +252,29 @@
           </div>
           <div class="section-heading">Begin Reading</div>
           <div class="quick-grid">
-            <button class="quick-card" data-book="Genesis" data-chapter="1">
-              <span class="qc-icon">📖</span>
-              <span class="qc-title">Genesis 1</span>
-              <span class="qc-sub">In the Beginning</span>
-            </button>
-            <button class="quick-card" data-book="Psalms" data-chapter="23">
-              <span class="qc-icon">🕊️</span>
-              <span class="qc-title">Psalm 23</span>
-              <span class="qc-sub">The Lord is My Shepherd</span>
-            </button>
-            <button class="quick-card" data-book="John" data-chapter="3">
-              <span class="qc-icon">✨</span>
-              <span class="qc-title">John 3</span>
-              <span class="qc-sub">For God So Loved</span>
-            </button>
-            <button class="quick-card" data-book="Matthew" data-chapter="5">
-              <span class="qc-icon">🏔️</span>
-              <span class="qc-title">Matthew 5</span>
-              <span class="qc-sub">The Beatitudes</span>
-            </button>
-            <button class="quick-card" data-book="Proverbs" data-chapter="3">
-              <span class="qc-icon">💡</span>
-              <span class="qc-title">Proverbs 3</span>
-              <span class="qc-sub">Trust in the Lord</span>
-            </button>
-            <button class="quick-card" data-book="Revelation" data-chapter="1">
-              <span class="qc-icon">🌟</span>
-              <span class="qc-title">Revelation 1</span>
-              <span class="qc-sub">The Revelation</span>
-            </button>
+            <button class="quick-card" data-book="Genesis" data-chapter="1"><span class="qc-icon">📖</span><span class="qc-title">Genesis 1</span><span class="qc-sub">In the Beginning</span></button>
+            <button class="quick-card" data-book="Psalms" data-chapter="23"><span class="qc-icon">🕊️</span><span class="qc-title">Psalm 23</span><span class="qc-sub">The Lord is My Shepherd</span></button>
+            <button class="quick-card" data-book="John" data-chapter="3"><span class="qc-icon">✨</span><span class="qc-title">John 3</span><span class="qc-sub">For God So Loved</span></button>
+            <button class="quick-card" data-book="Matthew" data-chapter="5"><span class="qc-icon">🏔️</span><span class="qc-title">Matthew 5</span><span class="qc-sub">The Beatitudes</span></button>
+            <button class="quick-card" data-book="Proverbs" data-chapter="3"><span class="qc-icon">💡</span><span class="qc-title">Proverbs 3</span><span class="qc-sub">Trust in the Lord</span></button>
+            <button class="quick-card" data-book="Revelation" data-chapter="1"><span class="qc-icon">🌟</span><span class="qc-title">Revelation 1</span><span class="qc-sub">The Revelation</span></button>
           </div>
           <div class="section-heading">Explore</div>
           <div class="explore-grid">
-            <button class="explore-card" data-tab="books">
-              <span class="ec-icon">📚</span>
-              <span class="ec-label">All Books</span>
-            </button>
-            <button class="explore-card" data-tab="search">
-              <span class="ec-icon">🔍</span>
-              <span class="ec-label">Search</span>
-            </button>
-            <button class="explore-card" data-study="goodnews">
-              <span class="ec-icon">🕊️</span>
-              <span class="ec-label">Good News</span>
-            </button>
-            <button class="explore-card" data-study="stories">
-              <span class="ec-icon">📜</span>
-              <span class="ec-label">Bible Stories</span>
-            </button>
-            <button class="explore-card" data-study="apocalypse">
-              <span class="ec-icon">🔥</span>
-              <span class="ec-label">Apocalypse</span>
-            </button>
-            <button class="explore-card" data-study="mysteries">
-              <span class="ec-icon">🌌</span>
-              <span class="ec-label">Mysteries</span>
-            </button>
+            <button class="explore-card" data-tab="books"><span class="ec-icon">📚</span><span class="ec-label">All Books</span></button>
+            <button class="explore-card" data-tab="search"><span class="ec-icon">🔍</span><span class="ec-label">Search</span></button>
+            <button class="explore-card" data-study="goodnews"><span class="ec-icon">🕊️</span><span class="ec-label">Good News</span></button>
+            <button class="explore-card" data-study="stories"><span class="ec-icon">📜</span><span class="ec-label">Bible Stories</span></button>
+            <button class="explore-card" data-study="apocalypse"><span class="ec-icon">🔥</span><span class="ec-label">Apocalypse</span></button>
+            <button class="explore-card" data-study="mysteries"><span class="ec-icon">🌌</span><span class="ec-label">Mysteries</span></button>
           </div>
         </div>
       </div>
 
-      <!-- BOOKS PAGE -->
       <div id="page-books" class="page">
         <div id="books-list" class="page-scroll">
-          <div class="testament-section">
-            <div class="testament-label">Old Testament</div>
-            <div id="ot-books" class="books-grid"></div>
-          </div>
-          <div class="testament-section">
-            <div class="testament-label">New Testament</div>
-            <div id="nt-books" class="books-grid"></div>
-          </div>
+          <div class="testament-section"><div class="testament-label">Old Testament</div><div id="ot-books" class="books-grid"></div></div>
+          <div class="testament-section"><div class="testament-label">New Testament</div><div id="nt-books" class="books-grid"></div></div>
         </div>
         <div id="chapters-view" class="page-scroll hidden">
           <div id="chapter-list-title" class="chapter-book-title"></div>
@@ -147,7 +290,6 @@
         </div>
       </div>
 
-      <!-- SEARCH PAGE -->
       <div id="page-search" class="page">
         <div class="page-scroll">
           <div class="search-bar-wrap">
@@ -160,7 +302,6 @@
         </div>
       </div>
 
-      <!-- STUDY PAGE -->
       <div id="page-study" class="page">
         <div class="page-scroll">
           <div class="study-tabs">
@@ -173,25 +314,12 @@
         </div>
       </div>
 
-      <!-- SETTINGS PAGE -->
       <div id="page-settings" class="page">
         <div class="page-scroll">
           <div class="settings-section">
             <div class="settings-title">Display</div>
-            <div class="setting-row">
-              <label class="setting-label">Dark Mode</label>
-              <button id="toggle-theme-switch" class="toggle-switch active" role="switch" aria-checked="true">
-                <span class="toggle-knob"></span>
-              </button>
-            </div>
-            <div class="setting-row">
-              <label class="setting-label">Font Size</label>
-              <div class="font-size-control">
-                <button id="font-decrease" class="font-btn">A−</button>
-                <span id="font-size-val">18px</span>
-                <button id="font-increase" class="font-btn">A+</button>
-              </div>
-            </div>
+            <div class="setting-row"><label class="setting-label">Dark Mode</label><button id="toggle-theme-switch" class="toggle-switch active" role="switch" aria-checked="true"><span class="toggle-knob"></span></button></div>
+            <div class="setting-row"><label class="setting-label">Font Size</label><div class="font-size-control"><button id="font-decrease" class="font-btn">A−</button><span id="font-size-val">18px</span><button id="font-increase" class="font-btn">A+</button></div></div>
           </div>
           <div class="settings-section">
             <div class="settings-title">About</div>
@@ -215,7 +343,6 @@
 
     </main>
 
-    <!-- BOTTOM NAVIGATION -->
     <nav id="bottom-nav">
       <button class="nav-btn active" data-tab="home">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
