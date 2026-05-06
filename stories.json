@@ -1,0 +1,60 @@
+{
+  "title": "Bible Stories",
+  "subtitle": "Great Stories from God's Word",
+  "items": [
+    {
+      "id": 1,
+      "category": "Creation",
+      "title": "In the Beginning: The Creation Story",
+      "summary": "God creates the heavens, the earth, and all living things in six days, culminating in the creation of humanity in His own image.",
+      "content": "In the beginning, there was nothing but God. Then, by the power of His word, God began creating. On the first day, He created light. On the second, He separated the sky from the water. On the third day, He gathered the waters to form seas and caused the land to bring forth grass, herbs, and trees. On the fourth day, He set the sun, moon, and stars in the heavens. On the fifth day, He filled the sea with creatures and the sky with birds. On the sixth day, He created animals — and then, in a special act of creation, He formed man from the dust of the earth and breathed life into him. God said, 'Let us make man in our image' — and so He did. He placed the man and woman in a beautiful garden called Eden, and on the seventh day, God rested and declared everything He had made 'very good.'",
+      "reference": "Genesis 1-2",
+      "icon": "🌍"
+    },
+    {
+      "id": 2,
+      "category": "Faith",
+      "title": "Abraham: The Father of Faith",
+      "summary": "God calls Abraham to leave his homeland with a promise — that through him, all the nations of the earth would be blessed.",
+      "content": "Abraham was 75 years old when God spoke to him: 'Leave your country, your people, and your father's household and go to the land I will show you.' God promised to make Abraham into a great nation, to bless him, and through him to bless all the families of the earth. Abraham obeyed, even though he did not know where he was going. Years later, when Abraham and his wife Sarah were both very old and childless, God renewed the promise: 'I will give you a son.' Though it seemed impossible — Sarah laughed — God was faithful. Isaac was born, just as God promised. Abraham's story is the foundation of faith: believing God even when circumstances make His promises seem impossible.",
+      "reference": "Genesis 12-21",
+      "icon": "⭐"
+    },
+    {
+      "id": 3,
+      "category": "Deliverance",
+      "title": "Moses and the Exodus",
+      "summary": "God raises up Moses to lead His people out of 400 years of slavery in Egypt, parting the Red Sea in one of the Bible's greatest miracles.",
+      "content": "The Israelites had been slaves in Egypt for 400 years. God heard their cries and called Moses from a burning bush that was not consumed: 'I am the God of Abraham, Isaac, and Jacob. I have seen the suffering of my people. Go — I am sending you to Pharaoh to bring my people out of Egypt.' Moses obeyed. Through ten plagues on Egypt, God demonstrated His power. On the night of the final plague — the Passover — the Israelites were spared by the blood of a lamb on their doorposts. They left Egypt in haste, over two million people. But Pharaoh changed his mind and sent his army after them. Trapped at the Red Sea, Moses stretched out his hand — and God parted the waters. The Israelites crossed on dry ground. When the Egyptian army followed, the waters returned and the sea swallowed them. God had delivered His people.",
+      "reference": "Exodus 3-14",
+      "icon": "🌊"
+    },
+    {
+      "id": 4,
+      "category": "Courage",
+      "title": "David and Goliath",
+      "summary": "A young shepherd boy defeats a nine-foot warrior champion with only a sling and a stone — because the battle belongs to the Lord.",
+      "content": "The Philistine army had a champion named Goliath — over nine feet tall, covered in bronze armor, carrying a spear like a weaver's beam. Every day for forty days, he taunted the Israelite army: 'Give me a man to fight me! If he wins, we will be your servants.' The whole army of Israel was terrified. Then David arrived, a teenage shepherd boy bringing food to his brothers. He heard Goliath's challenge and said: 'Who is this uncircumcised Philistine, that he should defy the armies of the living God?' Refusing Saul's armor, David walked toward Goliath with five smooth stones and a sling. Goliath laughed. David called back: 'You come against me with sword and spear, but I come against you in the name of the LORD Almighty!' David swung his sling — the stone sank into Goliath's forehead — and the giant fell. The battle belongs to the Lord.",
+      "reference": "1 Samuel 17",
+      "icon": "🪨"
+    },
+    {
+      "id": 5,
+      "category": "Resurrection",
+      "title": "The Resurrection of Jesus Christ",
+      "summary": "Three days after His crucifixion, Jesus rises from the dead — defeating sin and death forever and giving hope of eternal life to all who believe.",
+      "content": "After Jesus was crucified and buried, His disciples were devastated. Everything seemed lost. Early on the first day of the week, Mary Magdalene came to the tomb — and found the stone rolled away. The tomb was empty. An angel appeared: 'Do not be afraid. You are looking for Jesus, who was crucified. He is not here; he has risen, just as he said.' Mary ran to tell the disciples. Later that day, Jesus appeared to Mary in the garden, then to two disciples on the road to Emmaus, then to the eleven. He showed them His hands and side. He said: 'Peace be with you! As the Father has sent me, I am sending you.' The resurrection is the cornerstone of the Christian faith. Because Jesus rose, death is defeated. Because Jesus rose, we too shall rise.",
+      "reference": "Matthew 28; Luke 24; John 20",
+      "icon": "✝️"
+    },
+    {
+      "id": 6,
+      "category": "Prophecy",
+      "title": "Daniel in the Lion's Den",
+      "summary": "Daniel's unwavering faithfulness to God lands him in a den of lions — but God shuts the lions' mouths, and Daniel emerges unharmed.",
+      "content": "Daniel was a faithful servant of God who served in the court of King Darius the Mede. His enemies, jealous of his success, devised a plan: they convinced the king to sign a decree that no one could pray to any god except the king for thirty days — or be thrown into the lions' den. Daniel knew about the decree but still opened his windows and prayed to God three times a day, just as he always had. He was caught and brought before the king. With great sorrow, Darius had Daniel thrown into the den of lions. All night the king could not sleep. At first light, he rushed to the den and called out anxiously: 'Daniel, servant of the living God, has your God been able to rescue you?' Daniel answered: 'My God sent his angel, and he shut the mouths of the lions.' Daniel was lifted out without a single wound, because he had trusted in his God.",
+      "reference": "Daniel 6",
+      "icon": "🦁"
+    }
+  ]
+}
