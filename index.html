@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1040" id="meta-theme-color" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Holy Bible" />
+  <meta name="description" content="Read the Holy Bible offline — every book, chapter, and verse. King James Version." />
+  <title>Holy Bible — KJV</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="splash">
+    <div class="splash-inner">
+      <div class="splash-cross">✝</div>
+      <h1 class="splash-title">Holy Bible</h1>
+      <p class="splash-subtitle">The Living Word of God</p>
+      <div class="splash-loader"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" class="hidden">
+
+    <!-- TOP HEADER -->
+    <header id="app-header">
+      <button id="btn-back" class="btn-icon hidden" aria-label="Go back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </button>
+      <div id="header-title">
+        <span class="header-cross">✝</span>
+        <span>Holy Bible</span>
+      </div>
+      <button id="btn-theme" class="btn-icon" aria-label="Toggle theme">
+        <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </header>
+
+    <!-- PAGE CONTAINER -->
+    <main id="page-container">
+
+      <!-- HOME PAGE -->
+      <div id="page-home" class="page active">
+        <div class="page-scroll">
+          <div class="hero-banner">
+            <div class="hero-verse-label">VERSE OF THE DAY</div>
+            <blockquote id="daily-verse-text" class="hero-verse-text"></blockquote>
+            <cite id="daily-verse-ref" class="hero-verse-ref"></cite>
+          </div>
+          <div class="section-heading">Begin Reading</div>
+          <div class="quick-grid">
+            <button class="quick-card" data-book="Genesis" data-chapter="1">
+              <span class="qc-icon">📖</span>
+              <span class="qc-title">Genesis 1</span>
+              <span class="qc-sub">In the Beginning</span>
+            </button>
+            <button class="quick-card" data-book="Psalms" data-chapter="23">
+              <span class="qc-icon">🕊️</span>
+              <span class="qc-title">Psalm 23</span>
+              <span class="qc-sub">The Lord is My Shepherd</span>
+            </button>
+            <button class="quick-card" data-book="John" data-chapter="3">
+              <span class="qc-icon">✨</span>
+              <span class="qc-title">John 3</span>
+              <span class="qc-sub">For God So Loved</span>
+            </button>
+            <button class="quick-card" data-book="Matthew" data-chapter="5">
+              <span class="qc-icon">🏔️</span>
+              <span class="qc-title">Matthew 5</span>
+              <span class="qc-sub">The Beatitudes</span>
+            </button>
+            <button class="quick-card" data-book="Proverbs" data-chapter="3">
+              <span class="qc-icon">💡</span>
+              <span class="qc-title">Proverbs 3</span>
+              <span class="qc-sub">Trust in the Lord</span>
+            </button>
+            <button class="quick-card" data-book="Revelation" data-chapter="1">
+              <span class="qc-icon">🌟</span>
+              <span class="qc-title">Revelation 1</span>
+              <span class="qc-sub">The Revelation</span>
+            </button>
+          </div>
+          <div class="section-heading">Explore</div>
+          <div class="explore-grid">
+            <button class="explore-card" data-tab="books">
+              <span class="ec-icon">📚</span>
+              <span class="ec-label">All Books</span>
+            </button>
+            <button class="explore-card" data-tab="search">
+              <span class="ec-icon">🔍</span>
+              <span class="ec-label">Search</span>
+            </button>
+            <button class="explore-card" data-study="goodnews">
+              <span class="ec-icon">🕊️</span>
+              <span class="ec-label">Good News</span>
+            </button>
+            <button class="explore-card" data-study="stories">
+              <span class="ec-icon">📜</span>
+              <span class="ec-label">Bible Stories</span>
+            </button>
+            <button class="explore-card" data-study="apocalypse">
+              <span class="ec-icon">🔥</span>
+              <span class="ec-label">Apocalypse</span>
+            </button>
+            <button class="explore-card" data-study="mysteries">
+              <span class="ec-icon">🌌</span>
+              <span class="ec-label">Mysteries</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKS PAGE -->
+      <div id="page-books" class="page">
+        <div id="books-list" class="page-scroll">
+          <div class="testament-section">
+            <div class="testament-label">Old Testament</div>
+            <div id="ot-books" class="books-grid"></div>
+          </div>
+          <div class="testament-section">
+            <div class="testament-label">New Testament</div>
+            <div id="nt-books" class="books-grid"></div>
+          </div>
+        </div>
+        <div id="chapters-view" class="page-scroll hidden">
+          <div id="chapter-list-title" class="chapter-book-title"></div>
+          <div id="chapter-grid" class="chapter-grid"></div>
+        </div>
+        <div id="reader-view" class="page-scroll hidden">
+          <div id="reader-header" class="reader-header"></div>
+          <div id="verse-container" class="verse-container"></div>
+          <div id="reader-nav" class="reader-nav">
+            <button id="prev-chapter" class="reader-nav-btn">← Prev</button>
+            <button id="next-chapter" class="reader-nav-btn">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEARCH PAGE -->
+      <div id="page-search" class="page">
+        <div class="page-scroll">
+          <div class="search-bar-wrap">
+            <div class="search-bar">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input id="search-input" type="search" placeholder="Search the Bible…" autocomplete="off" />
+            </div>
+          </div>
+          <div id="search-results"></div>
+        </div>
+      </div>
+
+      <!-- STUDY PAGE -->
+      <div id="page-study" class="page">
+        <div class="page-scroll">
+          <div class="study-tabs">
+            <button class="study-tab active" data-study="goodnews">Good News</button>
+            <button class="study-tab" data-study="stories">Stories</button>
+            <button class="study-tab" data-study="apocalypse">Apocalypse</button>
+            <button class="study-tab" data-study="mysteries">Mysteries</button>
+          </div>
+          <div id="study-content"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS PAGE -->
+      <div id="page-settings" class="page">
+        <div class="page-scroll">
+          <div class="settings-section">
+            <div class="settings-title">Display</div>
+            <div class="setting-row">
+              <label class="setting-label">Dark Mode</label>
+              <button id="toggle-theme-switch" class="toggle-switch active" role="switch" aria-checked="true">
+                <span class="toggle-knob"></span>
+              </button>
+            </div>
+            <div class="setting-row">
+              <label class="setting-label">Font Size</label>
+              <div class="font-size-control">
+                <button id="font-decrease" class="font-btn">A−</button>
+                <span id="font-size-val">18px</span>
+                <button id="font-increase" class="font-btn">A+</button>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-title">About</div>
+            <div class="about-card">
+              <div class="about-cross">✝</div>
+              <h2 class="about-title">Holy Bible</h2>
+              <p class="about-desc">King James Version (KJV)</p>
+              <p class="about-text">A complete offline Bible app. Read, search, and study the Word of God anywhere — no internet required after first load.</p>
+              <p class="about-version">Version 1.0 · PWA</p>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-title">Install App</div>
+            <div class="install-card">
+              <p class="install-text">Add this Bible to your home screen for the full app experience — works completely offline.</p>
+              <button id="btn-install" class="btn-install">Add to Home Screen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav id="bottom-nav">
+      <button class="nav-btn active" data-tab="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-btn" data-tab="books">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Books</span>
+      </button>
+      <button class="nav-btn" data-tab="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span>Search</span>
+      </button>
+      <button class="nav-btn" data-tab="study">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Study</span>
+      </button>
+      <button class="nav-btn" data-tab="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
